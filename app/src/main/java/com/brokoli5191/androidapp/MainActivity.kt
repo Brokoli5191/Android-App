@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
@@ -131,7 +132,7 @@ fun ResultsScreen(vm: ResultsViewModel) {
 
     val exportLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.CreateDocument("text/csv"),
-        onResult = { uri ->
+        onResult = { uri: Uri? ->
             if (uri != null) {
                 scope.launch { vm.exportCsv(context, uri) }
             }
@@ -239,7 +240,7 @@ fun ResultsScreen(vm: ResultsViewModel) {
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text(if (editingId == null) "Speichern" else "Speichern")
+                Text("Speichern")
             }
 
             Spacer(Modifier.height(16.dp))
