@@ -6,7 +6,8 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "results")
 data class ResultEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    val className: String? = null,
     val name: String,
-    val jumpMeters: Double,
-    val sprintSeconds: Double
+    val jumpMeters: Double? = null,
+    val sprintSeconds: Double? = null
 )
